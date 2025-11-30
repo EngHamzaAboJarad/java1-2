@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>دورة Java - إعلان</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --muted: #384b5a;
+        --accent: #0b5fff;
+        --accent-2: #00c2a8;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        font-family: "Tajawal", sans-serif;
+        margin: 0;
+        background: #f6f8fb;
+        color: #0b1b2b;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 24px auto;
+        padding: 0 18px;
+      }
+
+      /* Hero */
+      .hero {
+        background: linear-gradient(90deg, #fff 0%, #f8fbff 100%);
+        border-radius: 12px;
+        padding: 22px;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        box-shadow: 0 10px 30px rgba(11, 91, 255, 0.06);
+      }
+      .hero .col {
+        flex: 1;
+      }
+      .hero h1 {
+        margin: 0 0 8px 0;
+        font-size: 22px;
+        color: var(--accent);
+      }
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .hero .cta {
+        margin-top: 12px;
+      }
+      .btn {
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 0;
+        cursor: pointer;
+      }
+      .btn.primary {
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(11, 91, 255, 0.08);
+        color: var(--accent);
+      }
+
+      /* price tag in hero */
+      .price-wrap {
+        margin-top: 12px;
+        text-align: right;
+      }
+      .price-tag {
+        display: inline-block;
+        background: linear-gradient(
+          90deg,
+          rgba(11, 91, 255, 0.06),
+          rgba(0, 194, 168, 0.03)
+        );
+        color: var(--accent);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 14px;
+        border: 1px solid rgba(11, 91, 255, 0.06);
+      }
+      .instructor {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 13px;
+      }
+
+      /* Slides area */
+      #slides {
+        margin-top: 18px;
+      }
+      .slides-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .slides-header h2 {
+        margin: 0;
+        font-size: 18px;
+      }
+      .slides-controls {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .progress {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .progress-bar {
+        width: 160px;
+        height: 8px;
+        background: #eef6ff;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .progress-bar > i {
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      }
+
+      .slides-list {
+        margin-top: 14px;
+      }
+      .slide {
+        display: none;
+        padding: 18px;
+        border-radius: 10px;
+        background: var(--bg);
+        box-shadow: 0 8px 22px rgba(11, 91, 255, 0.04);
+        border-left: 6px solid var(--accent);
+      }
+      .slide.active {
+        display: block;
+        animation: slideIn 0.36s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(12px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      .slide h3 {
+        margin-top: 0;
+      }
+      .slide ul {
+        margin: 8px 0 0 0;
+        padding-inline-start: 20px;
+      }
+
+      .slide-nav {
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: #eef6ff;
+        color: var(--accent);
+        border: 1px solid rgba(11, 91, 255, 0.06);
+        cursor: pointer;
+      }
+      .slide-nav.primary {
+        background: var(--accent);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      @media (max-width: 720px) {
+        .hero {
+          flex-direction: column;
+          text-align: center;
+        }
+        .slides-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+      /* Cards grid: modern, elegant list view */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      /* remove default list markers and spacing for any li inside the grid */
+      .cards-grid,
+      .cards-grid li,
+      .cards-grid .slide-item {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      @media (max-width: 880px) {
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.98),
+          var(--bg)
+        );
+        border-radius: 14px;
+        padding: 18px 18px;
+        box-shadow: 0 12px 30px rgba(11, 91, 255, 0.06);
+        border-left: 6px solid rgba(11, 91, 255, 0.08);
+        transform: translateY(14px) scale(0.997);
+        opacity: 0;
+        transition: transform 0.46s cubic-bezier(0.2, 0.9, 0.25, 1),
+          opacity 0.46s ease;
+      }
+
+      .card.visible {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+
+      .card h4 {
+        margin: 0 0 8px 0;
+        font-size: 18px;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; /* keep title to the right in RTL */
+        gap: 10px;
+      }
+
+      /* number badge prefixed to the title */
+      .card-num {
+        display: inline-block;
+        background: rgba(11, 91, 255, 0.08);
+        color: var(--accent);
+        font-weight: 800;
+        font-size: 13px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        min-width: 40px;
+        text-align: center;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      /* subtle hover */
+      .card:hover {
+        box-shadow: 0 18px 40px rgba(11, 91, 255, 0.08);
+        transform: translateY(-6px) scale(1.01);
+      }
+
+      .muted-meta {
+        font-size: 13px;
+        color: #6b7b89;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <section class="hero" aria-label="hero">
+        <div class="col">
+          <h1>دورة Java — 60 ساعة (من الصفر إلى المشروع)</h1>
+          <p>تعلم أساسيات Java، OOP، والمشاريع العملية مع تمارين وتقييمات.</p>
+          <div class="cta">
+            <button class="btn primary">اشترك الآن</button>
+            <button class="btn ghost">تحميل المنهج</button>
+          </div>
+          <div class="price-wrap">
+            <span class="price-tag">سعر رمزي: <strong>25 شيكل</strong></span>
+            <span class="instructor">مع المهندس حمزة ابوجراد</span>
+          </div>
+        </div>
+        <div class="col" style="max-width: 320px; text-align: center">
+          <img src="" alt="" style="width: 140px; opacity: 0.85" />
+        </div>
+      </section>
+
+      <section id="slides" aria-label="عرض الشرائح">
+        <div class="slides-header">
+          <h2>محتوى الدورة</h2>
+          <p class="muted-meta">
+            نظرة موجزة على كل جلسة — تمرينات عملية ومشروع ختامي
+          </p>
+        </div>
+
+        <div class="slides-list">
+          <div class="cards-grid" role="list">
+            <article class="card" data-index="1" role="listitem">
+              <h4>1 — المقدمة</h4>
+              <p>دورة تأسيس Java — 60 ساعة. مقدمة، أهداف، طريقة التقييم.</p>
+            </article>
+            <li class="slide-item" data-index="2">
+              <h4>2 — أهداف الدورة</h4>
+              <p>فهم JVM/JDK، كتابة برامج بسيطة، مبادئ OOP.</p>
+            </li>
+            <li class="slide-item" data-index="3">
+              <h4>3 — المتطلبات والمواد</h4>
+              <p>JDK، IntelliJ/VS Code، روابط تثبيت سريعة.</p>
+            </li>
+            <li class="slide-item" data-index="4">
+              <h4>4 — جدول الدورة</h4>
+              <p>نظرة عامة على توزيع الساعات والمواضيع الأسبوعية.</p>
+            </li>
+            <li class="slide-item" data-index="5">
+              <h4>5 — ما هي Java؟</h4>
+              <p>لغة كائنية تعمل على JVM، تطبيقات متنوعة.</p>
+            </li>
+            <li class="slide-item" data-index="6">
+              <h4>6 — JVM / JDK / JRE</h4>
+              <p>الاختلافات وأين نستخدم كلٍّ منها.</p>
+            </li>
+            <li class="slide-item" data-index="7">
+              <h4>7 — المتغيرات وأنواع البيانات</h4>
+              <p>Primitive types وأمثلة عملية.</p>
+            </li>
+            <li class="slide-item" data-index="8">
+              <h4>8 — التعبيرات والعمليات</h4>
+              <p>عمليات حسابية ومنطقية وأسبقية التنفيذ.</p>
+            </li>
+            <li class="slide-item" data-index="9">
+              <h4>9 — إدخال/إخراج</h4>
+              <p>System.out و Scanner — أمثلة عملية.</p>
+            </li>
+            <li class="slide-item" data-index="10">
+              <h4>10 — تعليقات وأفضل ممارسات</h4>
+              <p>تنظيم الكود، تسميات واضحة.</p>
+            </li>
+            <li class="slide-item" data-index="11">
+              <h4>11 — الشروط</h4>
+              <p>if / else / switch — أمثلة وتمارين.</p>
+            </li>
+            <li class="slide-item" data-index="12">
+              <h4>12 — الحلقات</h4>
+              <p>for / while / do-while / for-each مع أمثلة.</p>
+            </li>
+            <li class="slide-item" data-index="13">
+              <h4>13 — المصفوفات</h4>
+              <p>تعريف، وصول للعناصر، تمارين عملية.</p>
+            </li>
+            <li class="slide-item" data-index="14">
+              <h4>14 — مشاريع تمارين</h4>
+              <p>تمارين صغيرة لتطبيق المفاهيم.</p>
+            </li>
+            <li class="slide-item" data-index="15">
+              <h4>15 — الدوال (Methods)</h4>
+              <p>تعريف الدوال، معاملات، قيمة عودة.</p>
+            </li>
+            <li class="slide-item" data-index="16">
+              <h4>16 — نطاق المتغيرات و static</h4>
+              <p>نطاق المتغيرات، static، final.</p>
+            </li>
+            <li class="slide-item" data-index="17">
+              <h4>17 — التحميل الزائد</h4>
+              <p>Method overloading وأمثلة.</p>
+            </li>
+            <li class="slide-item" data-index="18">
+              <h4>18 — مقدمة في OOP</h4>
+              <p>Abstraction, Encapsulation, Inheritance, Polymorphism.</p>
+            </li>
+            <li class="slide-item" data-index="19">
+              <h4>19 — الفئات والكائنات</h4>
+              <p>إنشاء class، constructor، خصائص وطرق.</p>
+            </li>
+            <li class="slide-item" data-index="20">
+              <h4>20 — Encapsulation & Getters/Setters</h4>
+              <p>جعل الحقول private واستخدام getters/setters.</p>
+            </li>
+            <li class="slide-item" data-index="21">
+              <h4>21 — مشروع تطبيقي متوسط</h4>
+              <p>متطلبات ومخرجات مشروع إدارة طلاب.</p>
+            </li>
+            <li class="slide-item" data-index="22">
+              <h4>22 — الوراثة و super</h4>
+              <p>extends و super — أمثلة وتطبيق.</p>
+            </li>
+            <li class="slide-item" data-index="23">
+              <h4>23 — Collections</h4>
+              <p>ArrayList, HashMap — متى نستخدم كل منهما.</p>
+            </li>
+            <li class="slide-item" data-index="24">
+              <h4>24 — Exception Handling</h4>
+              <p>try / catch / finally / throw — أمثلة.</p>
+            </li>
+            <li class="slide-item" data-index="25">
+              <h4>25 — نصائح التعليم والتقييم</h4>
+              <p>تمارين يومية، مراجعات، مشروع نهائي.</p>
+            </li>
+            <article class="card" data-index="26" role="listitem">
+              <h4>26 — المشروع النهائي والاختتام</h4>
+              <p>متطلبات المشروع النهائي ومواعيد التسليم.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      (function () {
+        // Normalize items in the grid: convert legacy <li class="slide-item"> into <article class="card">,
+        // then ensure every element with data-index becomes a .card
+        const grid = document.querySelector(".cards-grid");
+        if (grid) {
+          const oldLis = Array.from(grid.querySelectorAll("li.slide-item"));
+          oldLis.forEach((li) => {
+            const art = document.createElement("article");
+            // copy attributes
+            Array.from(li.attributes).forEach((attr) =>
+              art.setAttribute(attr.name, attr.value)
+            );
+            // ensure semantic class and role
+            art.classList.remove("slide-item");
+            art.classList.add("card");
+            if (!art.getAttribute("role")) art.setAttribute("role", "listitem");
+            art.innerHTML = li.innerHTML;
+            li.replaceWith(art);
+          });
+        }
+
+        const indexedItems = grid
+          ? Array.from(grid.querySelectorAll("[data-index]"))
+          : [];
+
+        // Remove leading/trailing dots and surrounding whitespace from headings and paragraphs
+        function trimDotsEdges(str) {
+          if (!str) return "";
+          // remove leading/trailing dots (.) and surrounding whitespace/RTL marks
+          return str.replace(/^[\s\u200F\u200E.]+|[\s\u200F\u200E.]+$/g, "");
+        }
+
+        // Clean visible text nodes for h4 and p before we add prefixes
+        if (grid) {
+          Array.from(grid.querySelectorAll("h4, p")).forEach((el) => {
+            el.textContent = trimDotsEdges(el.textContent);
+          });
+        }
+
+        indexedItems.forEach((el) => {
+          el.classList.add("card");
+          // make role consistent
+          if (!el.getAttribute("role")) el.setAttribute("role", "listitem");
+          const h4 = el.querySelector("h4");
+          if (h4) {
+            // avoid adding duplicate prefixes when heading already starts with a number
+            const text = h4.textContent.trim();
+            if (!/^\d+\s*[-—]/.test(text)) {
+              const num = document.createElement("span");
+              num.className = "card-num";
+              num.textContent = (el.dataset.index || "") + " —";
+              h4.prepend(num);
+            }
+          }
+        });
+
+        // Reveal cards on scroll (IntersectionObserver) with a soft stagger
+        const cards = Array.from(document.querySelectorAll(".card"));
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target;
+                // small stagger based on position in grid
+                const delay = (cards.indexOf(el) % 6) * 60;
+                setTimeout(() => el.classList.add("visible"), delay);
+                observer.unobserve(el);
+              }
+            });
+          },
+          { threshold: 0.18 }
+        );
+
+        cards.forEach((c) => observer.observe(c));
+      })();
+    </script>
+  </body>
+</html>
